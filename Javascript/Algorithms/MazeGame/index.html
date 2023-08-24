@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maze Solver Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        canvas {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mazeCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("mazeCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const mazeSize = 20;
+        const cellSize = canvas.width / mazeSize;
+
+        const maze = Array.from({ length: mazeSize }, () => Array(mazeSize).fill(false));
+
+        function generateMaze() {
+            // Initialize maze with walls
+            for (let i = 0; i < mazeSize; i++) {
+                for (let j = 0; j < mazeSize; j++) {
+                    maze[i][j] = true;
+                }
+            }
+        
+            // Recursive Backtracking
+            function backtrack(x, y) {
+                maze[x][y] = false;
+        
+                const directions = [
+                    { dx: 1, dy: 0 },
+                    { dx: 0, dy: 1 },
+                    { dx: -1, dy: 0 },
+                    { dx: 0, dy: -1 }
+                ];
+                shuffleArray(directions);
+        
+                for (const direction of directions) {
+                    const newX = x + direction.dx * 2;
+                    const newY = y + direction.dy * 2;
+        
+                    if (newX >= 0 && newX < mazeSize && newY >= 0 && newY < mazeSize && maze[newX][newY]) {
+                        maze[newX - direction.dx][newY - direction.dy] = false;
+                        backtrack(newX, newY);
+                    }
+                }
+            }
+        
+            backtrack(1, 1);
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function drawMaze() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < mazeSize; i++) {
+                for (let j = 0; j < mazeSize; j++) {
+                    if (maze[i][j]) {
+                        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+        }
+
+        function solveMaze() {
+            const start = { x: 1, y: 1 };
+            const end = { x: mazeSize - 2, y: mazeSize - 2 };
+        
+            const visited = Array.from({ length: mazeSize }, () => Array(mazeSize).fill(false));
+            const solutionPath = [];
+        
+            function explore(x, y) {
+                if (x < 0 || x >= mazeSize || y < 0 || y >= mazeSize || maze[x][y] || visited[x][y]) {
+                    return false;
+                }
+        
+                visited[x][y] = true;
+                solutionPath.push({ x, y });
+        
+                if (x === end.x && y === end.y) {
+                    return true;
+                }
+        
+                const directions = [
+                    { dx: 1, dy: 0 },
+                    { dx: 0, dy: 1 },
+                    { dx: -1, dy: 0 },
+                    { dx: 0, dy: -1 }
+                ];
+        
+                for (const direction of directions) {
+                    if (explore(x + direction.dx, y + direction.dy)) {
+                        return true;
+                    }
+                }
+        
+                solutionPath.pop();
+                return false;
+            }
+        
+            explore(start.x, start.y);
+            animateSolution(solutionPath);
+        }
+        
+
+        function animateSolution(solutionPath) {
+            let step = 0;
+        
+            function drawCharacter(x, y) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawMaze();
+                ctx.fillStyle = "green";
+                ctx.fillRect(y * cellSize, x * cellSize, cellSize, cellSize);
+            }
+        
+            function stepAnimation() {
+                if (step < solutionPath.length) {
+                    const position = solutionPath[step];
+                    drawCharacter(position.x, position.y);
+                    step++;
+                    setTimeout(stepAnimation, 100); // Adjust the timeout for animation speed
+                }
+            }
+        
+            stepAnimation();
+        }
+        
+        function setup() {
+            generateMaze();
+            drawMaze();
+            solveMaze();
+        }
+
+        setup();
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shortest Path Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            gap: 2px;
+        }
+        .node {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        .start-node {
+            background-color: #00aaff;
+        }
+        .end-node {
+            background-color: #ffaa00;
+        }
+        .wall-node {
+            background-color: #333;
+        }
+        .shortest-path-node {
+            background-color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shortest Path Visualization</h1>
+    <button onclick="visualizeShortestPath()">Visualize Shortest Path</button>
+    <div id="grid"></div>
+    <script>
+        const gridContainer = document.getElementById("grid");
+        let startNode = null;
+        let endNode = null;
+        let isMouseDown = false;
+        let isDraggingStart = false;
+        let isDraggingEnd = false;
+        const nodes = [];
+
+        function createNodeElement(x, y) {
+            const node = document.createElement("div");
+            node.className = "node";
+            node.dataset.x = x;
+            node.dataset.y = y;
+            node.addEventListener("mousedown", onMouseDown);
+            node.addEventListener("mouseover", onMouseOver);
+            return node;
+        }
+
+        function onMouseDown(event) {
+            isMouseDown = true;
+            const node = event.target;
+            const x = parseInt(node.dataset.x);
+            const y = parseInt(node.dataset.y);
+            
+            if (node.classList.contains("start-node")) {
+                isDraggingStart = true;
+            } else if (node.classList.contains("end-node")) {
+                isDraggingEnd = true;
+            } else if (!node.classList.contains("start-node") && !node.classList.contains("end-node")) {
+                toggleWall(node);
+            }
+        }
+
+        function onMouseOver(event) {
+            if (!isMouseDown) return;
+
+            const node = event.target;
+            if (isDraggingStart) {
+                moveStartNode(node);
+            } else if (isDraggingEnd) {
+                moveEndNode(node);
+            } else if (!node.classList.contains("start-node") && !node.classList.contains("end-node")) {
+                toggleWall(node);
+            }
+        }
+
+        function toggleWall(node) {
+            node.classList.toggle("wall-node");
+        }
+
+        function moveStartNode(node) {
+            if (startNode) {
+                startNode.classList.remove("start-node");
+            }
+            startNode = node;
+            startNode.classList.add("start-node");
+        }
+
+        function moveEndNode(node) {
+            if (endNode) {
+                endNode.classList.remove("end-node");
+            }
+            endNode = node;
+            endNode.classList.add("end-node");
+        }
+
+        function createGrid() {
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    const node = createNodeElement(i, j);
+                    gridContainer.appendChild(node);
+                    nodes.push(node);
+                }
+            }
+        }
+
+        function visualizeShortestPath() {
+            if (!startNode || !endNode) {
+                alert("Please select a start node and an end node.");
+                return;
+            }
+
+            const shortestPath = dijkstraShortestPath();
+            animateShortestPath(shortestPath);
+        }
+
+        function dijkstraShortestPath() {
+            const distances = new Map(); // Stores the distance from start node to each node
+            const previousNodes = new Map(); // Stores the previous node in the shortest path
+            const unvisitedNodes = [...nodes]; // All nodes in the grid
+ 
+            distances.set(startNode, 0);
+            
+            while (unvisitedNodes.length > 0) {
+                unvisitedNodes.sort((nodeA, nodeB) => distances.get(nodeA) - distances.get(nodeB));
+                const closestNode = unvisitedNodes.shift();
+        
+                if (closestNode.classList.contains("end-node")) {
+                    return reconstructPath(previousNodes, closestNode);
+                }
+        
+                const neighbors = getNeighbors(closestNode);
+                for (const neighbor of neighbors) {
+                    const tentativeDistance = distances.get(closestNode) + 1; // In this case, all edges have weight 1
+        
+                    if (tentativeDistance < distances.get(neighbor)) {
+                        distances.set(neighbor, tentativeDistance);
+                        previousNodes.set(neighbor, closestNode);
+                    }
+                }
+            }
+        
+            return null; // No path found
+        }
+        
+        function getNeighbors(node) {
+            const x = parseInt(node.dataset.x);
+            const y = parseInt(node.dataset.y);
+            const neighbors = [];
+            
+            if (x > 0) neighbors.push(nodes[x - 1][y]);
+            if (x < 9) neighbors.push(nodes[x + 1][y]);
+            if (y > 0) neighbors.push(nodes[x][y - 1]);
+            if (y < 9) neighbors.push(nodes[x][y + 1]);
+        
+            return neighbors.filter(neighbor => !neighbor.classList.contains("wall-node"));
+        }
+        
+        function reconstructPath(previousNodes, endNode) {
+            const shortestPath = [];
+            let currentNode = endNode;
+        
+            while (currentNode !== startNode) {
+                shortestPath.unshift(currentNode);
+                currentNode = previousNodes.get(currentNode);
+            }
+        
+            shortestPath.unshift(startNode);
+            return shortestPath;
+        }
+        
+        function animateShortestPath(shortestPath) {
+            if (!shortestPath) return;
+
+            let delay = 50;
+
+            for (const node of shortestPath) {
+                if (!node.classList.contains("start-node") && !node.classList.contains("end-node")) {
+                    setTimeout(() => {
+                        node.classList.add("shortest-path-node");
+                    }, delay);
+                    delay += 50;
+                }
+            }
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>

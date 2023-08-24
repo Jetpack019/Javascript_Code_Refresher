@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Sort Visualization</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .bar {
+            width: 20px;
+            height: 200px;
+            background-color: teal;
+            margin: 0 2px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="barsContainer"></div>
+    <button onclick="startBubbleSort()">Start Bubble Sort</button>
+    <script>
+        const barsContainer = document.getElementById("barsContainer");
+
+        function generateRandomArray(size) {
+            const array = [];
+            for (let i = 0; i < size; i++) {
+                array.push(Math.floor(Math.random() * 200) + 1);
+            }
+            return array;
+        }
+
+        function displayBars(array) {
+            barsContainer.innerHTML = array.map(height => `<div class="bar" style="height:${height}px;"></div>`).join("");
+        }
+
+        async function bubbleSort(array) {
+            let sorted = false;
+            let len = array.length;
+
+            while (!sorted) {
+                sorted = true;
+                for (let i = 0; i < len - 1; i++) {
+                    if (array[i] > array[i + 1]) {
+                        sorted = false;
+                        // Swap values
+                        [array[i], array[i + 1]] = [array[i + 1], array[i]];
+                        displayBars(array);
+                        await sleep(100); // Delay for visualization
+                    }
+                }
+                len--;
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function startBubbleSort() {
+            const array = generateRandomArray(20); // Change size as needed
+            displayBars(array);
+            await bubbleSort(array);
+        }
+    </script>
+</body>
+</html>
