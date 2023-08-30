@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Night Day</title>
+
+    <link rel="stylesheet" href="style.css">nk
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class="switch">
+            <input type="checkbox" name="switch" class="switch-checkbox" id="custom-switch">
+            <label for="custom-switch" class="switch-label">
+                <span class="switch-one"></span>
+                <span class="switch-two"></span>
+            </label>
+        </div>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#custom-switch').change(function(){
+                $('.wrapper').toggleClass('dark-mode');
+            });
+        });
+    </script>
+    
+</body>
+</html>

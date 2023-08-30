@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">
+        Name: 
+        <input type="text" id="name">
+    </label>
+    <input type="submit" id="fetch">
+
+    <dl>
+        <dt>Age</dt>
+        <dd class="age">-</dd>
+
+        <dt>Location</dt>
+        <dd class="locatio">-</dd>
+
+        <dt>Job</dt>
+        <dd class="job">-</dd>
+        
+        <dt>DOB</dt>
+        <dd class="dob">-</dd>
+    </dl>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $("#fetch").on('click', function(){
+            var name = $('#name').val();
+
+            $.ajax({
+                url: 'lookup.php',
+                dataType: 'json',
+                type: 'GET',
+                data: {name: name},
+                cache: false,
+                success: function(data){
+                    if(data.exists){
+                        for(var label in data.information){
+                            $('.' + label).text(data.information[label]); 
+                        }
+                    } else{
+                        alert('Not found');
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

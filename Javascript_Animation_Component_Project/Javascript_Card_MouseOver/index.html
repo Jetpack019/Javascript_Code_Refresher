@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="slide-area">
+        <div class="img-area">
+            <div class="single-img">
+                <h1>Explore the Dungeon</h1>
+                <p>Prepare your trip</p>
+            </div>
+            <div class="single-img">
+                <h1>Island Adventure</h1>
+                <p>Prepare your trip</p>
+            </div>
+            <div class="single-img">
+                <h1>River Lights</h1>
+                <p>Prepare your trip</p>
+            </div>
+            <div class="single-img">
+                <h1>Train Trip</h1>
+                <p>Prepare your trip</p>
+            </div>
+
+     
+        </div>
+
+        <div class="nav-area">
+            <ul>
+                <li>Trip One</li>
+                <li>Trip Two</li>
+                <li>Trip Three</li>
+                <li>Trip Four</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.nav-area ul li').on('mouseover', function(){
+                var index = $(this).index() + 1;
+                $('.img-area .single-img').removeClass('active');
+                $('.img-area .single-img:nth-child(' + index + ')').addClass('active');
+            });
+        });
+    </script>
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.nav-area ul li:nth-child(1)').on('mouseover',function(){
+                $('.img-area .single-img').removeClass('active');
+                $('.img-area .single-img:nth-child(1)').addClass('active');
+            })
+            
+            $('.nav-area ul li:nth-child(2)').on('mouseover',function(){
+                $('.img-area .single-img').removeClass('active');
+                $('.img-area .single-img:nth-child(2)').addClass('active');
+            })
+
+            $('.nav-area ul li:nth-child(3)').on('mouseover',function(){
+                $('.img-area .single-img').removeClass('active');
+                $('.img-area .single-img:nth-child(3)').addClass('active');
+            })
+
+            $('.nav-area ul li:nth-child(4)').on('mouseover',function(){
+                $('.img-area .single-img').removeClass('active');
+                $('.img-area .single-img:nth-child(1)').addClass('active');
+            })
+        })
+    </script> -->
+</body>
+</html>
