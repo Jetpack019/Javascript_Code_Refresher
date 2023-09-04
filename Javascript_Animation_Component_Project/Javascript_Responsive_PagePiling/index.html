@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pagepiling/jquery.pagepiling.css">
+
+</head>
+<body>
+    
+    <div id="pagepiling">
+        <div class="section home-area" id="home">
+            <div class="wrapper">
+                <nav>
+                    <ul id="myMenu">
+                        <li  data-menuanchor="home" class="active"><a href="#home">Home</a></li>
+                        <li data-menuanchor="about"><a href="#about">About</a></li>
+                        <li data-menuanchor="port"><a href="#port">Portfolio</a></li>
+                        <li data-menuanchor="service"><a href="#service">Service</a></li>
+                        <li data-menuanchor="contact"><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="banner-area">
+                    <h2>Multipurpose <br>Website</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, accusantium.</p>
+                </div>
+            </div>
+        </div>
+        <div class="section about-area" id="about">
+            <div class="wrapper">
+                <h3>Little About Me</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam dolores similique odit dolorum rem. Non consectetur voluptates, molestias perspiciatis assumenda quam quos repellat at facilis quidem sapiente vitae quaerat unde hic reiciendis tempore saepe a eum nesciunt. Modi, molestias error.</p>
+            </div>
+        </div>
+        <div class="section portfolio-area" id="port">
+             <div class="wrapper">
+                <h3>Some of My Works</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit, eaque aperiam sunt officiis culpa illum exercitationem dolor quaerat reprehenderit amet totam. Iusto cupiditate eaque distinctio dolore aliquam facere veritatis tempore dolorem quod reiciendis, nihil dolorum veniam, ea autem tempora fugit?</p>
+             </div>
+        </div>
+        <div class="section services-area" id="services">
+             <div class="wrapper">
+                <h2>These are my services</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima iure labore suscipit perspiciatis. Reprehenderit, iure est. Sint nam numquam cumque eos voluptatum voluptates magnam explicabo, expedita accusantium debitis minima maxime?</p>
+             </div>
+        </div>
+        <div class="section contact-area" id="contact">
+               <div class="wrapper">
+                    <h2>Contact area</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, at.</p>
+                    <p><input type="text" placeholder="Enter Your Name"></p>
+                    <p><input type="email" placeholder="Enter Your Email"></p>
+                    <p><textarea placeholder="Enter Your Queries"></textarea></p>
+                    <p><input type="submit" value="submit"></p>
+               </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>  
+    <script src="pagepiling/jquery.pagepiling.js"></script>  
+    <script>
+        $(document).ready(function() {
+            $('#pagepiling').pagepiling({
+                direction: 'horizontal',
+                sectionsColor: ['#f2f2f2','#4BBFC3','#7BAABE','#03a0b0','#ff6f69'],
+                anchors: ['home','about','port','services','contact'],
+                menu: '#myMenu',
+                navigation: {
+                    'textColor': '#000',
+                    'bulletColor': '#000',
+                    'position': 'right',
+                    'tooltips': ['Home','About','Portfolio','Services','Contact'],
+                    'display': 'none'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

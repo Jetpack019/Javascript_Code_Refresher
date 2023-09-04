@@ -1,0 +1,114 @@
+body{
+    color: #fff;
+    font-size: 48px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+p{
+    font-family: Poppins;
+    line-height: 40px;
+    color: #fff;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    height: 50px;
+}
+
+nav ul{
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li{
+    display: inline-block;
+    padding: 15px 27px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fafafa;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    font-size: 35px;
+}
+
+.home-area{
+    background-image: url(3.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.home-area h2{
+    color: #fff;
+    font-size: 48px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.wrapper{
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.banner-area p{
+    padding: 0 60% 0 0;
+}
+
+.contact-area input[type=text], .contact-area input[type=email]{
+    width: 30%;
+    height: 40px;
+    padding: 0 20px;
+}
+
+.contact-area textarea{
+    width: 30%;
+    padding: 10px 20px;
+}
+
+.contact-area input[type=submit]{
+    background: saddlebrown;
+    padding: 10px 50px;
+    color: #fff;
+    font-size: 17px;
+    text-transform: uppercase;
+    border: 0;
+}
+
+
+
+/* responsive Desktop*/
+@media only screen and (min-width: 768px) and (max-width: 991px){
+
+}
+
+@media only screen and (max-width: 767px){
+    .wrapper{
+        width: 80%;
+    }
+    nav{
+        display: none;
+    }
+    .home-area h2{
+        font-size: 25px;
+    }
+    h3{
+        font-size: 30px;
+    }
+    .banner-area p{
+        padding: 0 12% 0 0;
+    }
+    .about-area p, .portfolio-area p, .services-area p, .contact-area p{
+        line-height: 20px;
+        font-size: 13px;
+    } 
+    .contact-area input[type=text], .contact-area input[type=email]{
+        width: 85%;
+        height: 30px;
+    }
+    .contact-area .text-area{
+        width: 85%;
+    }
+}

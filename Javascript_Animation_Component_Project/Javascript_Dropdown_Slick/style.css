@@ -1,0 +1,78 @@
+body{
+    background-image: url(2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.logo{
+    width: 20%;
+    float: left;
+}
+
+.logo img{
+    width: 30%;
+    height: auto;
+    float: right;
+}
+
+.menu{
+    width: 75%;
+    float: right;
+    list-style: none;
+}
+
+.menu li{
+    background: #262626;
+    width: 200px;
+    border: 1px solid #fff;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    float: left;
+    line-height: 50px;
+}
+
+.menu li a{
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+li:hover{
+    background: #000;
+}
+
+.slicknav_menu{
+    display: none;
+}
+
+@media all and (max-width:769px){
+
+    .slicknav_menu{
+        display: block;
+        width: 40%;
+        float: right;
+        background: transparent;
+    }
+    .slicknav_menu li{
+        background: #333;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .slicknav_nav a:hover{
+        background: transparent;
+        color: #fff;
+    }
+    .menu{
+        display: none;
+    }
+    .logo{
+        width: 30%;
+        float: left;
+    }
+
+}
