@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get HTML through AJAX GET</title>
+    
+    <style>
+        .fruits li{
+            font-weight: bold;
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get HTML through AJAX GET</h1>
+    <div id="container"></div>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+        const container = document.getElementById('container');
+
+
+        xhr.onload = function(){
+            if(this.status === 200){
+                container.innerHTML  = xhr.responseText;
+            } else{
+                console.warn('Did not receive 200 OK from response!')
+            }
+        };
+
+        xhr.open('get','fruits.html');
+        xhr.send();
+    </script>
+
+</body>
+</html>

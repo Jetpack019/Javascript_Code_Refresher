@@ -1,0 +1,39 @@
+var jsonObject = {
+    "products": [
+        {
+            "id": "123",
+            "title": "Random Place 1",
+            "description": "This is a trip place for your plan",
+            "image": "images/plan-2.jpg",
+            "price": 60
+        },
+        {
+            "id": "124",
+            "title": "Scenic Escape",
+            "description": "A beautiful getaway with stunning views",
+            "image": "images/traveller-2.jpg",
+            "price": 75
+        },
+        {
+            "id": "125",
+            "title": "Adventure Trek",
+            "description": "An exciting trekking expedition",
+            "image": "images/plan-3.jpg",
+            "price": 90
+        },
+        {
+            "id": "126",
+            "title": "Beach Retreat",
+            "description": "Relax by the serene beach",
+            "image": "images/plan-3.jpg",
+            "price": 80
+        },
+        {
+            "id": "127",
+            "title": "Mountain Expedition",
+            "description": "Conquer the highest peaks",
+            "image": "images/traveller-1.jpg",
+            "price": 120
+        }
+    ]
+}
