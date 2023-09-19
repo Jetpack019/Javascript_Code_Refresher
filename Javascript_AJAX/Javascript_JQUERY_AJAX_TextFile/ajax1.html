@@ -21,6 +21,11 @@
             // OPEN - Type, url/file, async
             xhr.open('GET','sample.txt',true);
 
+            // OPTIONAL - used for loaders
+            xhr.onprogress = function(){
+                console.log('READYSTATE: ',xhr.readyState);
+            }
+
             xhr.onload = function(){
                 if(this.status == 200){
                     // console.log(this.responseText)

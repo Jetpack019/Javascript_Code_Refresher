@@ -1,17 +1,5 @@
-[
-    {
+{
     "id":1,
     "name":"Jade Ross",
     "email":"banagjadeross@gmail.com"
-    },
-    {
-        "id": 2,
-        "name": "John Doe",
-        "email": "johndoe@example.com"
-    },
-    {
-        "id": 3,
-        "name": "Alice Johnson",
-        "email": "alice.johnson@email.com"
-    }
-]
+}
